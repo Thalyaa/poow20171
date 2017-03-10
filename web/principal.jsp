@@ -4,6 +4,7 @@
     Author     : Laboratorio
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,26 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%-- comentario do jsp--%>
         <h1>Hello World!</h1>
+        
+        <%! 
+            int contaVisitantes=0;
+        %>
+        
+         <%-- PRIMEIRA FORMA DE DECLARAR SCRIPTLET--%>
+        <%--SCRIPTLET --%>
+        <%
+            out.println("Mais um jeito de código java");
+            out.println("visitantes: " +(++contaVisitantes));
+        %>
+          <%-- SEGUNDA FORMA DE DECLARAR SCRIPTLET--%>
+         <jsp:scriptlet>
+            
+         </jsp:scriptlet>
+        <%-- EXPRESSION --%>
+        <br>
+        
+        Data: <%=(new Date()) .toLocaleString() %>
     </body>
 </html>
