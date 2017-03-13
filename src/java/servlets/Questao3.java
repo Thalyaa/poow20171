@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Laboratorio
+ * @author BPE
  */
-@WebServlet(name = "Questao2", urlPatterns = {"/questao2"})
-public class Questao2 extends HttpServlet {
+@WebServlet(name = "Questao3", urlPatterns = {"/questao3"})
+public class Questao3 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +32,14 @@ public class Questao2 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String nome = request.getParameter("nome");
-        char primeiraLetra = nome.charAt(0);
-        char ultimaPalavra =  nome.charAt(nome.length() - 1);
+        int idade = Integer.valueOf(request.getParameter("idade"));
+        String estadoCivil = request.getParameter("estadoCivil");
+        String escolaridade = request.getParameter("escolaridade");
+        String contratado = "Não atende aos requísitos da empresa.";
+        
+        if(idade > 20 && estadoCivil.equals("solteiro") && (escolaridade.equals("medio") || escolaridade.equals("superior"))){
+            contratado = "Contratado!";
+        }
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -42,13 +47,10 @@ public class Questao2 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Questao2</title>");            
+            out.println("<title>Servlet Questao3</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Resultado</h1>");
-            out.println("Primeira Letra:" +primeiraLetra);
-            out.println("Última Letra:" +ultimaPalavra);
-            out.println("<br>");
+            out.println("<h1>" + contratado + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

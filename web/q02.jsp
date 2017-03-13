@@ -9,11 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>2</title>
     </head>
    <h1>Questão 2</h1>
         <form  action="questao2" method="POST">
-            <input type="text" name="nome"/>
+            <input type="text" pattern=".{5,}" required name="nome" title="Digite pelo menos 5 caracteres"/>
             <input type="submit" value="Enviar"/>
         </form>
 </html>
