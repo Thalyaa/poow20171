@@ -7,7 +7,6 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,21 +31,26 @@ public class Questao4 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int nota = Integer.valueOf(request.getParameter("nota"));
-        String resultado = "";
-        if (nota < 7){
-            request.setAttribute("n1", nota);
-            RequestDispatcher dispatcher;
-            dispatcher = request.getRequestDispatcher("q04_1.jsp");
-            dispatcher.forward(request, response);
-                
-            }else{
-                 resultado = "Aluno Aprovado";
-            
-            }   
-            
+       
+        Float nota = 0.0f;
+        Float notaExame = 0.0f;         
+        String situacao;
+        if(request.getParameter("nota") != null){
+            nota = Float.valueOf(request.getParameter("nota"));
+            if(nota < 7)
+                situacao = "Exame";
+            else
+                situacao = "Aprovado";
+        }else{
+            notaExame = Float.valueOf(request.getParameter("notaexame"));
+            if(notaExame > 5)
+                situacao = "Aprovado no exame";
+            else
+                situacao = "Reprovado no exame";
         }
+        
+        if(situacao.equals("Exame"))
+            response.sendRedirect("q04.jsp?situacao="+situacao);
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -57,10 +61,16 @@ public class Questao4 extends HttpServlet {
             out.println("<title>Servlet Questao4</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>" +nota +"</h1>");
+            if(situacao.equals("Aprovado"))
+                out.println("<h1>Aluno aprovado sem necessidade de exame</h1>");
+            else if(situacao.equals("Aprovado no exame"))
+                out.println("<h1>Aluno aprovado no exame</h1>");
+            else
+                out.println("<h1>Aluno reprovado no exame</h1>");
             out.println("</body>");
             out.println("</html>");
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
