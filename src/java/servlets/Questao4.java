@@ -7,7 +7,6 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,24 +31,28 @@ public class Questao4 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int nota1 = Integer.valueOf(request.getParameter("nota1"));
-        String mensagem = "";
-        
-        if (nota1 < 7) {
-            Object nota;
-            request.setAttribute("nota1", nota1);
-                RequestDispatcher dispatcher;
-                dispatcher = request.getRequestDispatcher("q04_1.jsp");
-                dispatcher.forward(request, response);
-        }else
-        {
-            mensagem = "Aprovado";
+       
+        Float nota = 0.0f;
+        Float notaExame = 0.0f;         
+        String situacao;
+        if(request.getParameter("nota") != null){
+            nota = Float.valueOf(request.getParameter("nota"));
+            if(nota < 7)
+                situacao = "Exame";
+            else
+                situacao = "Aprovado";
+        }else{
+            notaExame = Float.valueOf(request.getParameter("notaexame"));
+            if(notaExame > 5)
+                situacao = "Aprovado no exame";
+            else
+                situacao = "Reprovado no exame";
         }
         
-        
-        
-        
+
+        if(situacao.equals("Exame"))
+            response.sendRedirect("q04.jsp?situacao="+situacao);
+
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -60,10 +63,10 @@ public class Questao4 extends HttpServlet {
             out.println("<title>Servlet Questao4</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>" + mensagem + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -106,3 +109,5 @@ public class Questao4 extends HttpServlet {
     }// </editor-fold>
 
 }
+
+          
