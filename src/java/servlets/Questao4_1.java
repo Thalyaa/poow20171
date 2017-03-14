@@ -7,7 +7,6 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luis
  */
-@WebServlet(name = "Questao4", urlPatterns = {"/questao4"})
-public class Questao4 extends HttpServlet {
+@WebServlet(name = "Questao4_1", urlPatterns = {"/questao4_1"})
+public class Questao4_1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,21 +32,15 @@ public class Questao4 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int nota1 = Integer.valueOf(request.getParameter("nota1"));
+        int exame = Integer.valueOf(request.getParameter("exame"));
         String mensagem = "";
         
-        if (nota1 < 7) {
-            Object nota;
-            request.setAttribute("nota1", nota1);
-                RequestDispatcher dispatcher;
-                dispatcher = request.getRequestDispatcher("q04_1.jsp");
-                dispatcher.forward(request, response);
+        if (exame >= 6){
+            mensagem = "Aluno Aprovado";
         }else
         {
-            mensagem = "Aprovado";
+            mensagem = "Aluno Reprovado";
         }
-        
-        
         
         
         
@@ -57,7 +50,7 @@ public class Questao4 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Questao4</title>");            
+            out.println("<title>Servlet Questao4_1</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>" + mensagem + "</h1>");

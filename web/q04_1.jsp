@@ -13,8 +13,11 @@
     </head>
     <body>
         <h1>Questão 4</h1>
-        <form  action="questao4" method="POST">
-            <input type="text" name="nota1"/>
+        <form  action="questao4_1" method="POST">
+            <% String nota1  = String.valueOf(request.getAttribute("nota1")); %>
+            
+            <input type="text" name="nota1" value="<%=nota1 %>" disable="true"/>
+            <input type="text" name="exame"/>
             <input type="submit" value="Enviar"/>
         </form>
     </body>
