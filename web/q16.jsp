@@ -4,6 +4,7 @@
     Author     : thalya.silva
 --%>
 
+<%@page import="servlets.Questao16"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,9 +13,8 @@
         <title>16</title>
     </head>
     <body>
-        <h1>Questão 16</h1>
+        <h1><%=Questao16.titulo%></h1>
         <form action="questao16" method="POST"> 
-           Digite a Senha:
             <input type="password" name="senha" placeholder="Senha..."/> 
             <input type="submit" value="Enviar"/>
     </body>

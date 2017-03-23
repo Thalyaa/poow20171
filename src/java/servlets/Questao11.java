@@ -5,7 +5,6 @@
  */
 package servlets;
 
-import pkg.NumeroPrimo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,11 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Thalya
+ * @author Fabin_000
  */
-@WebServlet(name = "Questao14", urlPatterns = {"/questao14"})
-public class Questao14 extends HttpServlet {
-
+@WebServlet(name = "Questao11", urlPatterns = {"/questao11"})
+public class Questao11 extends HttpServlet {
+    
+    
+    public static String titulo = "Digite dois numeros";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,17 +33,17 @@ public class Questao14 extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {  
+            throws ServletException, IOException {
         
-        int x = Integer.valueOf(request.getParameter("numero"));
+        int n1 = Integer.valueOf(request.getParameter("n1"));
+        int n2 = Integer.valueOf(request.getParameter("n2"));
+        int soma = 0;
         
-        String msg;
-        
-        if(NumeroPrimo.ehPrimo(x)){
-            msg = ("É Primo");
-        } else
-            msg = ("Não é Primo");
-            
+        if(n1 >= n2){
+            titulo = "O segundo numero deve ser maior!";
+            response.sendRedirect("q11.jsp");
+        }
+       
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -49,11 +51,13 @@ public class Questao14 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Questao13</title>");            
+            out.println("<title>Servlet Questao11</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Resultado</h1>");
-            out.println(msg);
+            for(n1 = n1+1;n1 < n2;n1++){
+                soma += n1;
+            }
+            out.println("<h2>A soma dos numeros eh: "+soma+"</h2>");
             out.println("</body>");
             out.println("</html>");
         }

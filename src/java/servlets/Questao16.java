@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Questao16", urlPatterns = {"/questao16"})
 public class Questao16 extends HttpServlet {
+    
+    public static String titulo = "Digite sua senha";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,6 +36,11 @@ public class Questao16 extends HttpServlet {
        
         String senha = request.getParameter("senha");
         
+        if(!senha.equals("Teste")){
+            response.sendRedirect("q16.jsp");
+            titulo = "Senha incorreta!Digite a senha novamente.";
+        }
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -43,12 +50,7 @@ public class Questao16 extends HttpServlet {
             out.println("<title> Questao16 </title>");            
             out.println("</head>");
             out.println("<body>");
-              if(senha.equals("teste")){
-                response.sendRedirect("principal.jsp");
-            }else{
-               out.println("<h3>Senha inválida, por favor digite a senha correta!</h3>");
-            }
-            out.println("<h1>" + request.getContextPath() + "</h1>");
+            out.println("<h1>A senha está correta!</h1>");
             out.println("</body>");
             out.println("</html>");
         }

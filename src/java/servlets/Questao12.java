@@ -5,22 +5,22 @@
  */
 package servlets;
 
-import pkg.NumeroPrimo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pkg.Pessoa;
 
 /**
  *
- * @author Thalya
+ * @author Fabin_000
  */
-@WebServlet(name = "Questao14", urlPatterns = {"/questao14"})
-public class Questao14 extends HttpServlet {
-
+@WebServlet(name = "Questao12", urlPatterns = {"/questao12"})
+public class Questao12 extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,17 +31,30 @@ public class Questao14 extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {  
+            throws ServletException, IOException {
         
-        int x = Integer.valueOf(request.getParameter("numero"));
         
-        String msg;
+        ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
         
-        if(NumeroPrimo.ehPrimo(x)){
-            msg = ("É Primo");
-        } else
-            msg = ("Não é Primo");
+        for(int i = 0; i <= 4; i++){
+            Pessoa pessoa = new Pessoa();
+            String nome =request.getParameter("nome"+(i+1));
+            int idade = Integer.valueOf(request.getParameter("idade"+(i+1)));
+            pessoa.setIdade(idade);
+            pessoa.setNome(nome);
+            pessoas.add(pessoa);
+        }
             
+            int maior = 0;
+            int somaIdades = 0;
+            Pessoa maisVelho = new Pessoa();
+        
+            for(Pessoa p: pessoas){
+                if(p.getIdade() > maior)
+                    maisVelho = p;
+                somaIdades += p.getIdade();             
+            }
+        
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -49,11 +62,12 @@ public class Questao14 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Questao13</title>");            
+            out.println("<title>Servlet Questao12</title>");            
             out.println("</head>");
+            out.println("<h1>A soma das idades eh: "+ somaIdades +"</h1>");
+            out.println("<h2>"+ maisVelho.getNome() + " eh o mais velho, sua idade eh: "
+                       +maisVelho.getIdade()+"</h2>");
             out.println("<body>");
-            out.println("<h1>Resultado</h1>");
-            out.println(msg);
             out.println("</body>");
             out.println("</html>");
         }
@@ -97,5 +111,4 @@ public class Questao14 extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
