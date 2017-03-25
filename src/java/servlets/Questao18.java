@@ -19,8 +19,8 @@ import pkg.Pessoa;
  *
  * @author Fabin_000
  */
-@WebServlet(name = "Questao12", urlPatterns = {"/questao12"})
-public class Questao12 extends HttpServlet {
+@WebServlet(name = "Questao18", urlPatterns = {"/questao18"})
+public class Questao18 extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,28 +33,33 @@ public class Questao12 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+         ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
         
-        ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
-        
-        for(int i = 0; i <= 4; i++){
+        for(int i = 0; i <= 9; i++){
             Pessoa pessoa = new Pessoa();
             String nome =request.getParameter("nome"+(i+1));
             int idade = Integer.valueOf(request.getParameter("idade"+(i+1)));
+            float altura = Float.parseFloat(request.getParameter("altura"+(i+1)));
             pessoa.setIdade(idade);
             pessoa.setNome(nome);
+            pessoa.setAltura(altura);
             pessoas.add(pessoa);
         }
             
             int maior = 0;
-            int somaIdades = 0;
+            float maiorAltura = 0.0f;
             Pessoa maisVelho = new Pessoa();
+            Pessoa maisAlto = new Pessoa();
         
             for(Pessoa p: pessoas){
                 if(p.getIdade() > maior){
                     maior = p.getIdade();
                     maisVelho = p;
                 }
-                somaIdades += p.getIdade();             
+                if(p.getAltura() > maiorAltura){
+                    maiorAltura = p.getAltura();
+                    maisAlto = p;
+                }
             }
         
         
@@ -64,12 +69,15 @@ public class Questao12 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Questao12</title>");            
+            out.println("<title>Servlet Questao18</title>");            
             out.println("</head>");
-            out.println("<h1>A soma das idades eh: "+ somaIdades +"</h1>");
-            out.println("<h2>"+ maisVelho.getNome() + " eh o mais velho, sua idade eh: "
-                       +maisVelho.getIdade()+"</h2>");
             out.println("<body>");
+            out.println("<h1>Mais velho</h1>");
+            out.println("<h3>Nome </h3>"+maisVelho.getNome()+"<br>");
+            out.println("<h3>Idade </h3>"+maisVelho.getIdade()+"<br>");
+            out.println("<h1>Mais alto</h1>");
+            out.println("<h3>Nome </h3>"+maisAlto.getNome()+"<br>");
+            out.println("<h3>Altura </h3>"+maisAlto.getAltura()+"<br>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -113,4 +121,5 @@ public class Questao12 extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

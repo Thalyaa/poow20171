@@ -17,5 +17,6 @@
         <form action="questao16" method="POST"> 
             <input type="password" name="senha" placeholder="Senha..."/> 
             <input type="submit" value="Enviar"/>
+        </form>
     </body>
 </html>

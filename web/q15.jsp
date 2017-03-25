@@ -4,7 +4,7 @@
     Author     : Thalya
 --%>
 
-<%@page import="questao13.NumeroPrimo"%>
+<%@page import="pkg.NumeroPrimo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

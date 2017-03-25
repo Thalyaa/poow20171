@@ -12,6 +12,7 @@ package pkg;
 public class Pessoa {
     String nome;
     int idade;
+    float altura;
 
 
     public void setNome(String nome){
@@ -28,6 +29,14 @@ public class Pessoa {
 
     public int getIdade(){
         return this.idade;
+    }
+    
+    public void setAltura(float altura){
+        this.altura = altura;
+    }
+    
+    public float getAltura(){
+        return this.altura;
     }
 
 }
