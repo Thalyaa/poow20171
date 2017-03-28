@@ -15,17 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ffos
+ * @author Fabin_000
  */
-@WebServlet(name = "Questao10", urlPatterns = {"/questao10"})
-public class Questao10 extends HttpServlet {
-    
-    public static int fatorial(int n){
-        if(n <= 1)
-            return 1;
-        else
-            return n*fatorial(n-1);
-    }
+@WebServlet(name = "Questao19", urlPatterns = {"/questao19"})
+public class Questao19 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,17 +33,17 @@ public class Questao10 extends HttpServlet {
             throws ServletException, IOException {
         
         int n = Integer.valueOf(request.getParameter("numero"));
-        
+                      
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Questao10</title>");            
+            out.println("<title>Servlet Questao19</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>O fatorial de " + n + " eh: "+ fatorial(n) +"</h1>");
+            out.println("<h1>Resultado: " + Questao10.fatorial(n) + "</h1>  ");
             out.println("</body>");
             out.println("</html>");
         }
